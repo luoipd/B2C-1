@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class RegistActivity extends BaseNewActivity {
-
+	/**
+	 * 注册
+	 */
 	EditText ed_username, ed_pwd;
 	Button btn_regist;
 	RegistEntity registEntity;
@@ -63,7 +65,7 @@ public class RegistActivity extends BaseNewActivity {
 		@Override
 		public void updateUI() {
 			// TODO Auto-generated method stub
-			if(registEntity.getRes() == 1){
+			if (registEntity.getRes() == 1) {
 				ActivityUtil.showToast(context, "恭喜您，注册成功！");
 			}
 		}

@@ -28,6 +28,10 @@ public class Urls {
 	
 	public final static String USER = "userController/";
 	
+	public final static String GOODS = "goodController/";
+	
+	public final static String GoodsCategory = "getCategory/";
+	
 	public final static String Register = "register";
 	
 	public final static String Shop = "/shopapi/index.php/";
