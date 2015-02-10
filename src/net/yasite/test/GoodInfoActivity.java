@@ -1,11 +1,15 @@
 package net.yasite.test;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import net.yasite.entity.GoodEntity;
+import net.yasite.entity.MyGoodEntity;
 import net.yasite.model.GoodModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.util.ActivityUtil;
 import android.content.Context;
 import android.os.Message;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +21,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 	String id;
 	GoodModel goodModel;
 	GoodEntity goodEntity;
+	MyGoodEntity myGoodEntity;
 	@Override
 	public void setupView() {
 		thumb = getImageView(R.id.thumb);
@@ -28,7 +33,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 	@Override
 	public void setContent() {
 		// TODO Auto-generated method stub
-		setContentView(R.layout.goods_item);
+		setContentView(R.layout.goods_info);
 	}
 
 	@Override
@@ -39,7 +44,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 
 	@Override
 	public boolean getIntentValue() {
-		id = getIntent().getStringExtra("id");
+		id = getIntent().getStringExtra("info");
 		if(id != null && !id.equals("")){
 			return true;
 		}else{
@@ -58,18 +63,24 @@ public class GoodInfoActivity extends BaseNewActivity {
 		@Override
 		public void updateUI() {
 			// TODO Auto-generated method stub
-			if(goodEntity != null){
+			if(myGoodEntity != null){
+				goodEntity = myGoodEntity.getData().get(0);
 				if(goodEntity.getGoods_name() != null){
 					name.setText(goodEntity.getGoods_name());
 				}else{
 					name.setText("");
 				}
 				if(goodEntity.getMarket_price() != null){
-					market_price.setText(goodEntity.getMarket_price());
+					market_price.setText("市场价："+goodEntity.getMarket_price());
 				}else{
 					market_price.setText("");
 				}
-				
+				if(goodEntity.getShop_price() != null){
+					shop_price.setText("本店价："+goodEntity.getShop_price());
+				}else{
+					shop_price.setText("");
+				}
+				ImageLoader.getInstance().displayImage("http://www.yasite.net:80/ecshop/"+goodEntity.getGoods_img(), thumb);
 			}else{
 				ActivityUtil.showToast(context, "未找到商品");
 			}
@@ -78,7 +89,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 		@Override
 		public void doTask(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-//			goodEntity = goodModel.RequestGoodInfo(id);
+			myGoodEntity = goodModel.RequestGoodInfo(id);
 		}
 
 		@Override

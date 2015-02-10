@@ -30,20 +30,20 @@ public class GoodService_copy extends BaseService {
 		return null;
 	}
 	
-	public GoodEntity getGoodInfo(String id){
-		GoodInfoParams pm = new GoodInfoParams();
-		pm.setId(id);
-		BaseAPI api = new GoodInfoAPI(context, pm);
-		try {
-			if(api.doGet()){
-				return (GoodEntity)api.getHandleResult();
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
+//	public GoodEntity getGoodInfo(String id){
+//		GoodInfoParams pm = new GoodInfoParams();
+//		pm.setId(id);
+//		BaseAPI api = new GoodInfoAPI(context, pm);
+//		try {
+//			if(api.doGet()){
+//				return (GoodEntity)api.getHandleResult();
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+//	
 
 }

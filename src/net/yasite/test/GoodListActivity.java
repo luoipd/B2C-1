@@ -1,15 +1,17 @@
 package net.yasite.test;
 
-import android.content.Context;
-import android.os.Message;
-import android.view.View;
-import android.widget.AdapterView;
 import net.yasite.adapter.GoodsListAdapter;
 import net.yasite.entity.GoodListEntity;
 import net.yasite.model.GoodModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.util.ActivityUtil;
 import net.yasite.view.XListView;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 public class GoodListActivity extends BaseNewActivity {
 
@@ -17,6 +19,7 @@ public class GoodListActivity extends BaseNewActivity {
 	GoodsListAdapter adapter;
 	String id;
 	GoodModel goodModel;
+	GoodListEntity goodList;
 
 	@Override
 	public void setupView() {
@@ -43,6 +46,10 @@ public class GoodListActivity extends BaseNewActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				ActivityUtil.showToast(context, position + "`````");
+				Intent intent = new Intent(context,GoodInfoActivity.class);
+				intent.putExtra("info", goodList.getData().get(position-1).getGoods_id()+"");
+				Log.e("``````", goodList.getData().get(position-1).getGoods_id()+"");
+				startActivity(intent);
 			}
 		});
 	}
@@ -60,7 +67,6 @@ public class GoodListActivity extends BaseNewActivity {
 	}
 	
 	class MyHandler extends HandlerHelp{
-		GoodListEntity goodList;
 		public MyHandler(Context context) {
 			super(context);
 			goodModel = new GoodModel(context);

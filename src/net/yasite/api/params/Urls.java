@@ -38,6 +38,8 @@ public class Urls {
 	
 	public final static String getGoodList = "getGoodList/";
 	
+	public final static String getGoodInfo = "getGoodInfo/";
+	
 }
 
 

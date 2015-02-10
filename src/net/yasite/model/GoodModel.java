@@ -1,6 +1,8 @@
 package net.yasite.model;
 
+import net.yasite.entity.GoodEntity;
 import net.yasite.entity.GoodListEntity;
+import net.yasite.entity.MyGoodEntity;
 import net.yasite.service.GoodService;
 import android.content.Context;
 
@@ -18,8 +20,8 @@ public class GoodModel extends Model {
 		return goodService.getGoodList(page,id);
 	}
 	
-//	public GoodEntity RequestGoodInfo(String id){
-//		return goodService.getGoodInfo(id);
-//	}
+	public MyGoodEntity RequestGoodInfo(String id){
+		return goodService.getGoodInfo(id);
+	}
 	
 }
