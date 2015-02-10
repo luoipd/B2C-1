@@ -6,6 +6,7 @@ import net.yasite.model.GoodsCategoryModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.util.ActivityUtil;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
@@ -46,7 +47,10 @@ public class ThirdListActivity extends BaseNewActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				ActivityUtil.showToast(context, "等待按类型查询接口开放");
+//				ActivityUtil.showToast(context, "等待按类型查询接口开放");
+				Intent intent = new Intent(context,GoodListActivity.class);
+				intent.putExtra("info", categoryListEntity.getData().get(position).getCat_id()+"");
+				startActivity(intent);
 			}
 		});
 	}

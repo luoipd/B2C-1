@@ -2,13 +2,9 @@ package net.yasite.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
-import net.yasite.adapter.NewsListAdapter.ViewHolder;
 import net.yasite.entity.GoodEntity;
-import net.yasite.entity.NewsEntity;
 import net.yasite.test.BaseApplication;
 import net.yasite.test.R;
 import android.content.Context;
@@ -107,8 +103,10 @@ public class GoodListAdapter extends BaseAdapter {
 		}
 		
 		if(item.getGoods_thumb() != null && !item.getGoods_thumb().equals("")){
-			mImageLoader.displayImage(item.getGoods_thumb(),
-					mViewHolder.thumb, options);
+//			mImageLoader.displayImage("http://www.yasite.net:80/ecshop/"+item.getGoods_thumb(),
+//					mViewHolder.thumb, options);
+			mImageLoader.displayImage("http://www.yasite.net/ecshop/images/200905/thumb_img/7_thumb_G_1241422785492.jpg",
+					mViewHolder.thumb,options);
 		}else{
 			mImageLoader.displayImage("drawable://" + R.drawable.ic_launcher, mViewHolder.thumb);
 		}

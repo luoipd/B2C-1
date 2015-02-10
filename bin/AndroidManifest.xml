@@ -56,6 +56,8 @@
         </activity>
         <activity android:name="net.yasite.test.ThirdListActivity" >
         </activity>
+        <activity android:name="net.yasite.test.GoodListActivity" >
+        </activity>
     </application>
 
 </manifest>

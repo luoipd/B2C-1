@@ -4,14 +4,22 @@ import java.io.Serializable;
 import java.util.List;
 
 public class GoodListEntity implements Serializable {
-	private List<GoodEntity> list;
+	private List<GoodEntity> data;
+	private int res;
 
-	public List<GoodEntity> getList() {
-		return list;
+	public List<GoodEntity> getData() {
+		return data;
 	}
 
-	public void setList(List<GoodEntity> list) {
-		this.list = list;
+	public void setData(List<GoodEntity> data) {
+		this.data = data;
 	}
-	
+
+	public int getRes() {
+		return res;
+	}
+
+	public void setRes(int res) {
+		this.res = res;
+	}
 }

@@ -78,7 +78,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 		@Override
 		public void doTask(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-			goodEntity = goodModel.RequestGoodInfo(id);
+//			goodEntity = goodModel.RequestGoodInfo(id);
 		}
 
 		@Override

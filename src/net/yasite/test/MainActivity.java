@@ -1,24 +1,22 @@
 package net.yasite.test;
 
-import net.yasite.adapter.GoodListAdapter;
 import net.yasite.adapter.TestAdapter;
 import net.yasite.entity.GoodListEntity;
 import net.yasite.model.GoodModel;
 import net.yasite.net.HandlerHelp;
+import net.yasite.util.ActivityUtil;
 import net.yasite.view.XListView;
 import net.yasite.view.XListView.OnXListViewListener;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Message;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.util.Log;
 
 public class MainActivity extends BaseNewActivity implements OnXListViewListener{
 	XListView listView;
 	TestAdapter adapter;
 	GoodModel goodModel;
 	int pageNumber = 1;
+	String id;
 	
 	
 	@Override
@@ -53,25 +51,31 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 		//实例化model，修改组件属性，判定控件，启动获取数据的线程
 		adapter = new TestAdapter(context);
 		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				if(position > 0){
-					Intent it = new Intent(context,GoodInfoActivity.class);
-					it.putExtra("id", adapter.getItem(position - 1).getGoods_id());
-					startActivity(it);
-				}
-			}
-		});
+//		listView.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+//					long arg3) {
+//				if(position > 0){
+//					Intent it = new Intent(context,GoodInfoActivity.class);
+//					it.putExtra("id", adapter.getItem(position - 1).getGoods_id());
+//					startActivity(it);
+//				}
+//			}
+//		});
 		listView.refresh(this);
 	}
 
 	@Override
 	public boolean getIntentValue() {
 		//默认永远返回true,如果需要判断Intent是否有值传过来，需要重写此方法
-		return true;
+		id = getIntent().getStringExtra("info");
+		if(id != null && !id.equals("")){
+			return true;
+		}else{
+			ActivityUtil.showToast(context, "没有相应的商品");
+			return false;
+		}
 	}
 	
 	class GoodListHandler extends HandlerHelp{
@@ -86,22 +90,24 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 			listView.stopRefresh();
 			listView.stopLoadMore();
 			if(goodList != null){
-				if(goodList.getList() != null 
-						&& goodList.getList().size() > 0){
+				if(goodList.getData() != null 
+						&& goodList.getData().size() > 0){
 					if(pageNumber == 1){
-						adapter.setList(goodList.getList());
+						adapter.setList(goodList.getData());
+						Log.e("````````", "```````````");
 					}else{
-						adapter.getList().addAll(goodList.getList());
+						adapter.getList().addAll(goodList.getData());
 					}
 					pageNumber++;
 					adapter.notifyDataSetChanged();
+					Log.e("``````````", "test");
 				}
 			}
 		}
 
 		@Override
 		public void doTask(Message msg) throws Exception {
-			goodList = goodModel.RequestGoodList(pageNumber);
+			goodList = goodModel.RequestGoodList(pageNumber+"",id);
 		}
 
 		@Override
