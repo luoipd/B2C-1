@@ -1,13 +1,17 @@
 package net.yasite.test;
 
 import net.yasite.fragment.ListFragment;
+import net.yasite.fragment.MineFragment;
 import net.yasite.model.GoodsCategoryModel;
+import net.yasite.model.LoginModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.util.ActivityUtil;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -67,6 +71,11 @@ public class HomeActivity extends BaseNewActivity {
 				break;
 			case R.id.img_mine:
 				ActivityUtil.showToast(context, "img_mine");
+//				Intent intent = new Intent(context,LoginActivity.class);
+//				startActivity(intent);
+				ft = fm.beginTransaction();
+				ft.replace(android.R.id.content, new MineFragment());
+				ft.commit();
 				break;
 			case R.id.relative1:
 				ActivityUtil.showToast(context, "relative1");

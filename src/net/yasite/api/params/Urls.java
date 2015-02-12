@@ -34,6 +34,8 @@ public class Urls {
 	
 	public final static String Register = "register";
 	
+	public final static String Login = "login";
+	
 	public final static String Shop = "/shopapi/index.php/";
 	
 	public final static String getGoodList = "getGoodList/";

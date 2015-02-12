@@ -17,7 +17,7 @@ public class RegistActivity extends BaseNewActivity {
 	 */
 	EditText ed_username, ed_pwd;
 	Button btn_regist;
-	RegistEntity registEntity;
+	RegistEntity registEntity = null;
 	RegistModel registModel;
 	String name, pwd;
 
@@ -65,8 +65,13 @@ public class RegistActivity extends BaseNewActivity {
 		@Override
 		public void updateUI() {
 			// TODO Auto-generated method stub
-			if (registEntity.getRes() == 1) {
+			if (registEntity != null) {
 				ActivityUtil.showToast(context, "恭喜您，注册成功！");
+				registModel.saveToken(registEntity.getData().getToken());
+				registModel.saveSp("user_id", registEntity.getData().getUser_id());
+				registModel.saveSp("user_name", registEntity.getData().getUser_name());
+			} else {
+				ActivityUtil.showToast(context, "抱歉，用户名已存在！");
 			}
 		}
 
@@ -74,7 +79,6 @@ public class RegistActivity extends BaseNewActivity {
 		public void doTask(Message msg) throws Exception {
 			// TODO Auto-generated method stub
 			registEntity = (RegistEntity) registModel.RequestPost(name, pwd);
-			Log.e("``````````", registEntity.toString());
 		}
 
 		@Override

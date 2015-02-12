@@ -1,6 +1,5 @@
 package net.yasite.model;
 
-import net.yasite.entity.GoodEntity;
 import net.yasite.entity.GoodListEntity;
 import net.yasite.entity.MyGoodEntity;
 import net.yasite.service.GoodService;
