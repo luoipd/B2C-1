@@ -1,5 +1,9 @@
 package net.yasite.test;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.yasite.adapter.CarListAdapter;
 import net.yasite.entity.CarItemEntity;
 import net.yasite.entity.CarListEntity;
@@ -11,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Message;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -62,6 +67,22 @@ public class CarActivity extends BaseNewActivity {
 					item.setChecked(isChecked);
 				}
 				adapter.notifyDataSetChanged();
+			}
+		});
+		btn_confirm.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				List<CarItemEntity> carlist = new ArrayList<CarItemEntity>();
+				for (CarItemEntity carItemEntity : carListEntity.getData()) {
+					if(carItemEntity.isChecked()){
+						carlist.add(carItemEntity);
+					}
+				}
+				Intent intent = new Intent(context,CheckOutActivity.class);
+				intent.putExtra("info", (Serializable)carlist);
+				startActivity(intent);
 			}
 		});
 	}

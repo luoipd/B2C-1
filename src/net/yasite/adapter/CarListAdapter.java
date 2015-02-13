@@ -2,14 +2,10 @@ package net.yasite.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.yasite.adapter.GoodsListAdapter.MyHolder;
 import net.yasite.entity.CarItemEntity;
 import net.yasite.test.R;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender.SendIntentException;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -20,7 +16,7 @@ import android.widget.TextView;
 public class CarListAdapter extends YasiteAdapter {
 
 	List<CarItemEntity> list = new ArrayList<CarItemEntity>();
-	double sum ;
+	double sum;
 
 	public CarListAdapter(Context context) {
 		super(context);
@@ -88,8 +84,11 @@ public class CarListAdapter extends YasiteAdapter {
 							sum = 0;
 							list.get(position).setChecked(isChecked);
 							for (CarItemEntity item : list) {
-								if(item.isChecked()){
-									sum += Double.parseDouble(item.getGoods_price())*Double.parseDouble(item.getGoods_number());
+								if (item.isChecked()) {
+									sum += Double.parseDouble(item
+											.getGoods_price())
+											* Double.parseDouble(item
+													.getGoods_number());
 								}
 							}
 							Intent intent = new Intent("net.yasite.adapter.sum");
