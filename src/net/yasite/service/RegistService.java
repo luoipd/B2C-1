@@ -53,5 +53,4 @@ public class RegistService extends BaseService {
 		RegistAPI api = new RegistAPI(context, null);
 		return api.getSp(key);
 	}
-
 }

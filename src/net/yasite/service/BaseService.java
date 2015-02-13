@@ -2,6 +2,8 @@ package net.yasite.service;
 
 import java.util.LinkedHashMap;
 
+import net.yasite.api.BaseAPI;
+import net.yasite.api.LoginAPI;
 import net.yasite.dao.DaoMaster;
 import net.yasite.dao.DaoSession;
 import net.yasite.dao.UserDao;

@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 
 public class HomeActivity extends BaseNewActivity {
 
-	ImageView img_home, img_list, img_mine;
+	ImageView img_home, img_list, img_mine,img_car;
 	GoodsCategoryModel goodsCategoryModel;
 	FragmentManager fm;
 	FragmentTransaction ft;
@@ -31,6 +31,7 @@ public class HomeActivity extends BaseNewActivity {
 		img_home = getImageView(R.id.img_home);
 		img_list = getImageView(R.id.img_list);
 		img_mine = getImageView(R.id.img_mine);
+		img_car = getImageView(R.id.img_car);
 		fm = getSupportFragmentManager();
 		relative_jiadian = getRelativeLayout(R.id.relative1);
 		relative_fuzhuang = getRelativeLayout(R.id.relative2);
@@ -51,6 +52,7 @@ public class HomeActivity extends BaseNewActivity {
 		img_home.setOnClickListener(listener);
 		img_list.setOnClickListener(listener);
 		img_mine.setOnClickListener(listener);
+		img_car.setOnClickListener(listener);
 	}
 
 	OnClickListener listener = new View.OnClickListener() {
@@ -76,6 +78,11 @@ public class HomeActivity extends BaseNewActivity {
 				ft = fm.beginTransaction();
 				ft.replace(android.R.id.content, new MineFragment());
 				ft.commit();
+				break;
+			case R.id.img_car:
+				ActivityUtil.showToast(context, "car");
+				Intent intent = new Intent(context,CarActivity.class);
+				startActivity(intent);
 				break;
 			case R.id.relative1:
 				ActivityUtil.showToast(context, "relative1");

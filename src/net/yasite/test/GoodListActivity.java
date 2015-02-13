@@ -47,8 +47,9 @@ public class GoodListActivity extends BaseNewActivity {
 				// TODO Auto-generated method stub
 				ActivityUtil.showToast(context, position + "`````");
 				Intent intent = new Intent(context,GoodInfoActivity.class);
-				intent.putExtra("info", goodList.getData().get(position-1).getGoods_id()+"");
-				Log.e("``````", goodList.getData().get(position-1).getGoods_id()+"");
+//				intent.putExtra("info", goodList.getData().get(position-1).getGoods_id()+"");
+				intent.putExtra("info", goodList.getData().get(position-1));
+//				Log.e("``````", goodList.getData().get(position-1).getGoods_id()+"");
 				startActivity(intent);
 			}
 		});

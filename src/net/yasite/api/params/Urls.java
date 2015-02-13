@@ -42,6 +42,12 @@ public class Urls {
 	
 	public final static String getGoodInfo = "getGoodInfo/";
 	
+	public final static String addAddress = "addAddress/";
+	
+	public final static String Car = "cartController/";
+	
+	public final static String addGood = "addGood/";
+	
 }
 
 

@@ -60,6 +60,8 @@
         </activity>
         <activity android:name="net.yasite.test.LoginActivity" >
         </activity>
+        <activity android:name="net.yasite.test.CarActivity" >
+        </activity>
     </application>
 
 </manifest>

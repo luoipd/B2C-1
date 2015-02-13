@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
 
 public class RegistAPI extends BaseAPI {
 
@@ -29,11 +30,11 @@ public class RegistAPI extends BaseAPI {
 	 * 在注册后保存user_id、user_name等信息到Sp中
 	 */
 	public void saveSp(String key, String value) {
-		getPrefs().edit().putString(key, value).commit();
+		PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
 	}
 
 	public String getSp(String key) {
-		return getPrefs().getString(key, "");
+		return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "");
 	}
 
 }

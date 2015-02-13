@@ -1,17 +1,20 @@
 package net.yasite.test;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import net.yasite.entity.GoodEntity;
 import net.yasite.entity.MyGoodEntity;
+import net.yasite.model.CarModel;
 import net.yasite.model.GoodModel;
+import net.yasite.model.RegistModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.util.ActivityUtil;
 import android.content.Context;
 import android.os.Message;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class GoodInfoActivity extends BaseNewActivity {
 	ImageView thumb;
@@ -20,14 +23,19 @@ public class GoodInfoActivity extends BaseNewActivity {
 	TextView shop_price;
 	String id;
 	GoodModel goodModel;
+	CarModel carModel;
 	GoodEntity goodEntity;
 	MyGoodEntity myGoodEntity;
+	Button btn_buy, btn_car;
+
 	@Override
 	public void setupView() {
 		thumb = getImageView(R.id.thumb);
 		name = getTextView(R.id.name);
 		market_price = getTextView(R.id.market_price);
 		shop_price = getTextView(R.id.promote_price);
+		btn_buy = getButton(R.id.button1);
+		btn_car = getButton(R.id.button2);
 	}
 
 	@Override
@@ -38,24 +46,45 @@ public class GoodInfoActivity extends BaseNewActivity {
 
 	@Override
 	public void setModel() {
-		goodModel = new GoodModel(context);
-		new GoodInfoHandler(context).execute();
+		carModel = new CarModel(context);
+		if (goodEntity.getGoods_name() != null) {
+			name.setText(goodEntity.getGoods_name());
+		} else {
+			name.setText("");
+		}
+		if (goodEntity.getMarket_price() != null) {
+			market_price.setText("市场价：" + goodEntity.getMarket_price());
+		} else {
+			market_price.setText("");
+		}
+		if (goodEntity.getShop_price() != null) {
+			shop_price.setText("本店价：" + goodEntity.getShop_price());
+		} else {
+			shop_price.setText("");
+		}
+		ImageLoader.getInstance().displayImage(
+				"http://www.yasite.net:80/ecshop/" + goodEntity.getGoods_img(),
+				thumb);
+
+		btn_car.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				new AddGoodHandler(context).execute();
+			}
+		});
 	}
 
 	@Override
 	public boolean getIntentValue() {
-		id = getIntent().getStringExtra("info");
-		if(id != null && !id.equals("")){
-			return true;
-		}else{
-			ActivityUtil.showToast(context, "未找到商品");
-			return false;
-		}
+		goodEntity = (GoodEntity) getIntent().getSerializableExtra("info");
+		return true;
 	}
-	
-	class GoodInfoHandler extends HandlerHelp{
 
-		public GoodInfoHandler(Context context) {
+	class AddGoodHandler extends HandlerHelp {
+
+		public AddGoodHandler(Context context) {
 			super(context);
 			// TODO Auto-generated constructor stub
 		}
@@ -63,41 +92,24 @@ public class GoodInfoActivity extends BaseNewActivity {
 		@Override
 		public void updateUI() {
 			// TODO Auto-generated method stub
-			if(myGoodEntity != null){
-				goodEntity = myGoodEntity.getData().get(0);
-				if(goodEntity.getGoods_name() != null){
-					name.setText(goodEntity.getGoods_name());
-				}else{
-					name.setText("");
-				}
-				if(goodEntity.getMarket_price() != null){
-					market_price.setText("市场价："+goodEntity.getMarket_price());
-				}else{
-					market_price.setText("");
-				}
-				if(goodEntity.getShop_price() != null){
-					shop_price.setText("本店价："+goodEntity.getShop_price());
-				}else{
-					shop_price.setText("");
-				}
-				ImageLoader.getInstance().displayImage("http://www.yasite.net:80/ecshop/"+goodEntity.getGoods_img(), thumb);
-			}else{
-				ActivityUtil.showToast(context, "未找到商品");
-			}
 		}
 
 		@Override
 		public void doTask(Message msg) throws Exception {
-			// TODO Auto-generated method stub
-			myGoodEntity = goodModel.RequestGoodInfo(id);
+			String token = new RegistModel(context).getToken();
+			String user_id = new RegistModel(context).getSp("user_id");
+			carModel.addGood(user_id, goodEntity.getGoods_id(),
+					goodEntity.getGoods_sn(), goodEntity.getGoods_name(),
+					goodEntity.getMarket_price(), goodEntity.getShop_price(),
+					1 + "", token);
 		}
 
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
 
 }

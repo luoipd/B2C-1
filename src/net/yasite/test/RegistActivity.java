@@ -5,8 +5,8 @@ import net.yasite.model.RegistModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.util.ActivityUtil;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,6 +70,9 @@ public class RegistActivity extends BaseNewActivity {
 				registModel.saveToken(registEntity.getData().getToken());
 				registModel.saveSp("user_id", registEntity.getData().getUser_id());
 				registModel.saveSp("user_name", registEntity.getData().getUser_name());
+				Intent intent = new Intent(context,HomeActivity.class);
+				startActivity(intent);
+				finish();
 			} else {
 				ActivityUtil.showToast(context, "抱歉，用户名已存在！");
 			}

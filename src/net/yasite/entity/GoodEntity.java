@@ -52,5 +52,12 @@ public class GoodEntity extends Object implements Serializable {
 	public void setShop_price(String shop_price) {
 		this.shop_price = shop_price;
 	}
+	@Override
+	public String toString() {
+		return "GoodEntity [goods_id=" + goods_id + ", goods_sn=" + goods_sn
+				+ ", goods_name=" + goods_name + ", goods_thumb=" + goods_thumb
+				+ ", goods_img=" + goods_img + ", market_price=" + market_price
+				+ ", shop_price=" + shop_price + "]";
+	}
 	
 }

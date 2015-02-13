@@ -27,10 +27,6 @@ public class LoginAPI extends BaseAPI {
 		return new Gson().fromJson(json.toString(), RegistEntity.class);
 	}
 
-	/**
-	 * 登陆后保存user_id、user_name等信息到Sp中
-	 */
-
 	public void saveSp(String key, String value) {
 		PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
 	}
@@ -42,4 +38,5 @@ public class LoginAPI extends BaseAPI {
 	public void clearSp(){
 		PreferenceManager.getDefaultSharedPreferences(context).edit().clear().commit();
 	}
+	
 }
