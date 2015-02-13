@@ -18,12 +18,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class HomeActivity extends BaseNewActivity {
-
-	ImageView img_home, img_list, img_mine,img_car;
+	/**
+	 * 主界面
+	 */
+	ImageView img_home, img_list, img_mine, img_car;
 	GoodsCategoryModel goodsCategoryModel;
 	FragmentManager fm;
 	FragmentTransaction ft;
-	RelativeLayout relative_jiadian,relative_fuzhuang,relative_meishi,relative_hufa;
+	RelativeLayout relative_jiadian, relative_fuzhuang, relative_meishi,
+			relative_hufa;
 
 	@Override
 	public void setupView() {
@@ -63,7 +66,7 @@ public class HomeActivity extends BaseNewActivity {
 			switch (v.getId()) {
 			case R.id.img_home:
 				ActivityUtil.showToast(context, "img_home");
-//				new GoodsCategoryHandler(context).execute();
+				// new GoodsCategoryHandler(context).execute();
 				break;
 			case R.id.img_list:
 				ActivityUtil.showToast(context, "img_list");
@@ -73,15 +76,15 @@ public class HomeActivity extends BaseNewActivity {
 				break;
 			case R.id.img_mine:
 				ActivityUtil.showToast(context, "img_mine");
-//				Intent intent = new Intent(context,LoginActivity.class);
-//				startActivity(intent);
+				// Intent intent = new Intent(context,LoginActivity.class);
+				// startActivity(intent);
 				ft = fm.beginTransaction();
 				ft.replace(android.R.id.content, new MineFragment());
 				ft.commit();
 				break;
 			case R.id.img_car:
 				ActivityUtil.showToast(context, "car");
-				Intent intent = new Intent(context,CarActivity.class);
+				Intent intent = new Intent(context, CarActivity.class);
 				startActivity(intent);
 				break;
 			case R.id.relative1:
@@ -98,8 +101,8 @@ public class HomeActivity extends BaseNewActivity {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	class GoodsCategoryHandler extends HandlerHelp{
+
+	class GoodsCategoryHandler extends HandlerHelp {
 
 		public GoodsCategoryHandler(Context context) {
 			super(context);
@@ -108,28 +111,28 @@ public class HomeActivity extends BaseNewActivity {
 		@Override
 		public void updateUI() {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void doTask(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-//			goodsCategoryModel.RequestPost(0+"");
-//			goodsCategoryModel.RequestPost(1+"");
-//			goodsCategoryModel.RequestPost(2+"");
-//			goodsCategoryModel.RequestPost(7+"");
-//			goodsCategoryModel.RequestPost(8+"");
-//			goodsCategoryModel.RequestPost(9+"");
-//			goodsCategoryModel.RequestPost(11+"");
-//			goodsCategoryModel.RequestPost(12+"");
+			// goodsCategoryModel.RequestPost(0+"");
+			// goodsCategoryModel.RequestPost(1+"");
+			// goodsCategoryModel.RequestPost(2+"");
+			// goodsCategoryModel.RequestPost(7+"");
+			// goodsCategoryModel.RequestPost(8+"");
+			// goodsCategoryModel.RequestPost(9+"");
+			// goodsCategoryModel.RequestPost(11+"");
+			// goodsCategoryModel.RequestPost(12+"");
 		}
 
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
 
 }

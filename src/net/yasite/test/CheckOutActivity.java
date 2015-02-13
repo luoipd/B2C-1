@@ -15,16 +15,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class CheckOutActivity extends BaseNewActivity {
-
+	/**
+	 * 结算
+	 */
 	ListView listView;
-	Button btn_confirm,btn_select;
-	EditText ed_name,ed_address;
+	Button btn_confirm, btn_select;
+	EditText ed_name, ed_address;
 	TextView text_sum;
 	CarItemEntity carItemEntity;
 	List<CarItemEntity> list;
 	CheckOutAdapter adapter;
 	MyReceiver receiver;
-	
+
 	@Override
 	public void setupView() {
 		// TODO Auto-generated method stub
@@ -49,30 +51,31 @@ public class CheckOutActivity extends BaseNewActivity {
 		adapter.setList(list);
 		listView.setAdapter(adapter);
 		receiver = new MyReceiver();
-		registerReceiver(receiver, new IntentFilter("net.yasite.adapter.checkoutsum"));
+		registerReceiver(receiver, new IntentFilter(
+				"net.yasite.adapter.checkoutsum"));
 	}
 
 	@Override
 	public boolean getIntentValue() {
 		// TODO Auto-generated method stub
 		list = (List<CarItemEntity>) getIntent().getSerializableExtra("info");
-		if(list!= null){
+		if (list != null) {
 			return true;
-		}else{
+		} else {
 			ActivityUtil.showToast(context, "请选择要购买的商品");
 			return false;
 		}
 	}
-	
-	public class MyReceiver extends BroadcastReceiver{
+
+	public class MyReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			double sum = intent.getDoubleExtra("sum", 0);
-			text_sum.setText("合计："+sum+"元");
+			text_sum.setText("合计：" + sum + "元");
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub

@@ -17,6 +17,9 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class GoodInfoActivity extends BaseNewActivity {
+	/**
+	 * 商品详情
+	 */
 	ImageView thumb;
 	TextView name;
 	TextView market_price;

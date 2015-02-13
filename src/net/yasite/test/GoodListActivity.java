@@ -15,6 +15,9 @@ import android.widget.AdapterView;
 
 public class GoodListActivity extends BaseNewActivity {
 
+	/**
+	 * 商品列表
+	 */
 	XListView listview;
 	GoodsListAdapter adapter;
 	String id;
@@ -46,10 +49,12 @@ public class GoodListActivity extends BaseNewActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				ActivityUtil.showToast(context, position + "`````");
-				Intent intent = new Intent(context,GoodInfoActivity.class);
-//				intent.putExtra("info", goodList.getData().get(position-1).getGoods_id()+"");
-				intent.putExtra("info", goodList.getData().get(position-1));
-//				Log.e("``````", goodList.getData().get(position-1).getGoods_id()+"");
+				Intent intent = new Intent(context, GoodInfoActivity.class);
+				// intent.putExtra("info",
+				// goodList.getData().get(position-1).getGoods_id()+"");
+				intent.putExtra("info", goodList.getData().get(position - 1));
+				// Log.e("``````",
+				// goodList.getData().get(position-1).getGoods_id()+"");
 				startActivity(intent);
 			}
 		});
@@ -66,8 +71,8 @@ public class GoodListActivity extends BaseNewActivity {
 			return false;
 		}
 	}
-	
-	class MyHandler extends HandlerHelp{
+
+	class MyHandler extends HandlerHelp {
 		public MyHandler(Context context) {
 			super(context);
 			goodModel = new GoodModel(context);
@@ -83,14 +88,14 @@ public class GoodListActivity extends BaseNewActivity {
 		@Override
 		public void doTask(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-			goodList = goodModel.RequestGoodList(1+"",id);
+			goodList = goodModel.RequestGoodList(1 + "", id);
 		}
 
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
 		}
-		
+
 	}
 
 }

@@ -23,7 +23,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class CarActivity extends BaseNewActivity {
-
+	/**
+	 * 购物车
+	 */
 	CarModel carModel;
 	ListView listview;
 	CarListEntity carListEntity;
@@ -32,7 +34,7 @@ public class CarActivity extends BaseNewActivity {
 	TextView text_sum;
 	CheckBox cb_all;
 	MyReceiver receiver;
-	
+
 	@Override
 	public void setupView() {
 		listview = getListView(R.id.listview_car);
@@ -56,12 +58,13 @@ public class CarActivity extends BaseNewActivity {
 		listview.setAdapter(adapter);
 		receiver = new MyReceiver();
 		registerReceiver(receiver, new IntentFilter("net.yasite.adapter.sum"));
-		
-		//全选功能
+
+		// 全选功能
 		cb_all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			
+
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
 				// TODO Auto-generated method stub
 				for (CarItemEntity item : carListEntity.getData()) {
 					item.setChecked(isChecked);
@@ -70,18 +73,18 @@ public class CarActivity extends BaseNewActivity {
 			}
 		});
 		btn_confirm.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				List<CarItemEntity> carlist = new ArrayList<CarItemEntity>();
 				for (CarItemEntity carItemEntity : carListEntity.getData()) {
-					if(carItemEntity.isChecked()){
+					if (carItemEntity.isChecked()) {
 						carlist.add(carItemEntity);
 					}
 				}
-				Intent intent = new Intent(context,CheckOutActivity.class);
-				intent.putExtra("info", (Serializable)carlist);
+				Intent intent = new Intent(context, CheckOutActivity.class);
+				intent.putExtra("info", (Serializable) carlist);
 				startActivity(intent);
 			}
 		});
@@ -92,8 +95,8 @@ public class CarActivity extends BaseNewActivity {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	class CarHandler extends HandlerHelp{
+
+	class CarHandler extends HandlerHelp {
 
 		public CarHandler(Context context) {
 			super(context);
@@ -118,20 +121,20 @@ public class CarActivity extends BaseNewActivity {
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
-	
-	public class MyReceiver extends BroadcastReceiver{
+
+	public class MyReceiver extends BroadcastReceiver {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			double sum = intent.getDoubleExtra("sum", 0);
-			text_sum.setText("合计："+sum+"元");
+			text_sum.setText("合计：" + sum + "元");
 		}
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub

@@ -3,6 +3,8 @@ package net.yasite.fragment;
 import net.yasite.model.LoginModel;
 import net.yasite.test.LoginActivity;
 import net.yasite.test.R;
+import net.yasite.test.RegionActivity;
+import net.yasite.test.SettingActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -67,10 +69,12 @@ public class MineFragment extends Fragment {
 				break;
 			case R.id.mine_setting:
 				Toast.makeText(getActivity(), "setting", 0).show();
+				Intent intent = new Intent(getActivity(),SettingActivity.class);
+				startActivity(intent);
 				break;
 			case R.id.btn_mine:
-				Intent intent = new Intent(getActivity(), LoginActivity.class);
-				startActivityForResult(intent, 1);
+				Intent intent1 = new Intent(getActivity(), LoginActivity.class);
+				startActivityForResult(intent1, 1);
 			case R.id.btn_exit:
 				Toast.makeText(getActivity(), "exit", 0).show();
 				new LoginModel(getActivity()).clearSp();
