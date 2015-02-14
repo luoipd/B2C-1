@@ -22,8 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="100dp"
-            android:text="TextView" />
+            android:layout_marginLeft="100dp" />
 
         <Button
             android:id="@+id/btn_car_confirm"
@@ -32,7 +31,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:text="确认" />
-        
+
         <Button
             android:id="@+id/btn_car_del"
             android:layout_width="wrap_content"

@@ -2,9 +2,11 @@ package net.yasite.api;
 
 import java.util.List;
 import net.yasite.api.params.Urls;
+import net.yasite.entity.CarItemReEitity;
 import org.apache.http.NameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.google.gson.Gson;
 import android.content.Context;
 
 public class AddGoodAPI extends BaseAPI {
@@ -18,7 +20,7 @@ public class AddGoodAPI extends BaseAPI {
 	@Override
 	public Object handlerResult(JSONObject json) throws JSONException {
 		// TODO Auto-generated method stub
-		return null;
+		return new Gson().fromJson(json.toString(),CarItemReEitity.class);
 	}
 
 }

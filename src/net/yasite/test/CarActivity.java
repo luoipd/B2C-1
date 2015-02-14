@@ -76,6 +76,7 @@ public class CarActivity extends BaseNewActivity {
 				adapter.notifyDataSetChanged();
 			}
 		});
+		//购买
 		btn_confirm.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -92,7 +93,7 @@ public class CarActivity extends BaseNewActivity {
 				startActivity(intent);
 			}
 		});
-
+		//删除
 		btn_del.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -104,9 +105,9 @@ public class CarActivity extends BaseNewActivity {
 						sb.append(",");
 					}
 				}
-				sb.deleteCharAt(sb.length()-1);
-				ids = "["+sb.toString()+"]";
-				System.out.println("``````"+ids);
+				sb.deleteCharAt(sb.length() - 1);
+				ids = "[" + sb.toString() + "]";
+				System.out.println("``````" + ids);
 				new DelHandler(context).execute();
 			}
 		});
@@ -164,7 +165,8 @@ public class CarActivity extends BaseNewActivity {
 			// TODO Auto-generated method stub
 			String user_id = new RegistModel(context).getSp("user_id");
 			String token = new RegistModel(context).getToken();
-			carListEntity = (CarListEntity) carModel.deleteGood(user_id, ids, token);
+			carListEntity = (CarListEntity) carModel.deleteGood(user_id, ids,
+					token);
 		}
 
 		@Override

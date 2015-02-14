@@ -18,8 +18,9 @@ public class CarService extends BaseService {
 
 	/**
 	 * 添加到购物车
+	 * @return 
 	 */
-	public void addGood(String user_id, String goods_id, String goods_sn,
+	public Object addGood(String user_id, String goods_id, String goods_sn,
 			String goods_name, String market_price, String goods_price,
 			String goods_number, String token) {
 		List<NameValuePair> pm = new ArrayList<NameValuePair>();
@@ -33,12 +34,13 @@ public class CarService extends BaseService {
 		BaseAPI api = new AddGoodAPI(context, pm, token);
 		try {
 			if (api.doPost()) {
-				api.getHandleResult();
+				return api.getHandleResult();
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	/**

@@ -1,13 +1,19 @@
 package net.yasite.test;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.yasite.entity.CarItemEntity;
+import net.yasite.entity.CarItemReEitity;
 import net.yasite.entity.GoodEntity;
 import net.yasite.entity.MyGoodEntity;
 import net.yasite.model.CarModel;
 import net.yasite.model.GoodModel;
 import net.yasite.model.RegistModel;
 import net.yasite.net.HandlerHelp;
-import net.yasite.util.ActivityUtil;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +36,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 	GoodEntity goodEntity;
 	MyGoodEntity myGoodEntity;
 	Button btn_buy, btn_car;
+	CarItemReEitity carItemReEitity;
 
 	@Override
 	public void setupView() {
@@ -75,6 +82,16 @@ public class GoodInfoActivity extends BaseNewActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				new AddGoodHandler(context).execute();
+				finish();
+			}
+		});
+		
+		btn_buy.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				new BuyHandler(context).execute();
 			}
 		});
 	}
@@ -101,7 +118,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 		public void doTask(Message msg) throws Exception {
 			String token = new RegistModel(context).getToken();
 			String user_id = new RegistModel(context).getSp("user_id");
-			carModel.addGood(user_id, goodEntity.getGoods_id(),
+			carItemReEitity = (CarItemReEitity) carModel.addGood(user_id, goodEntity.getGoods_id(),
 					goodEntity.getGoods_sn(), goodEntity.getGoods_name(),
 					goodEntity.getMarket_price(), goodEntity.getShop_price(),
 					1 + "", token);
@@ -110,9 +127,39 @@ public class GoodInfoActivity extends BaseNewActivity {
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
+		}
+	}
+	
+	class BuyHandler extends HandlerHelp {
 
+		public BuyHandler(Context context) {
+			super(context);
+			// TODO Auto-generated constructor stub
 		}
 
-	}
+		@Override
+		public void updateUI() {
+			Intent intent = new Intent(context,CheckOutActivity.class);
+			List<CarItemEntity> list = new ArrayList<CarItemEntity>();
+			list.add(carItemReEitity.getData());
+			intent.putExtra("info", (Serializable)list);
+			startActivity(intent);
+			finish();
+		}
 
+		@Override
+		public void doTask(Message msg) throws Exception {
+			String token = new RegistModel(context).getToken();
+			String user_id = new RegistModel(context).getSp("user_id");
+			carItemReEitity = (CarItemReEitity) carModel.addGood(user_id, goodEntity.getGoods_id(),
+					goodEntity.getGoods_sn(), goodEntity.getGoods_name(),
+					goodEntity.getMarket_price(), goodEntity.getShop_price(),
+					1 + "", token);
+		}
+
+		@Override
+		public void doTaskAsNoNetWork(Message msg) throws Exception {
+			// TODO Auto-generated method stub
+		}
+	}
 }
