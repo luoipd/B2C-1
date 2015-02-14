@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Message;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -42,6 +43,18 @@ public class AddressListActivity extends BaseNewActivity {
 		new MyHanlder(context).execute();
 		adapter = new AddressListAdapter(context);
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(context, AddressInfoActivity.class);
+				intent.putExtra("info",
+						addressListEntity.getData().get(position));
+				startActivityForResult(intent, 3);
+			}
+		});
 		btn_add.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -62,6 +75,9 @@ public class AddressListActivity extends BaseNewActivity {
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		// TODO Auto-generated method stub
 		if (arg0 == 2 && arg1 == 2) {
+			new MyHanlder(context).execute();
+			adapter.notifyDataSetChanged();
+		}else if(arg0 == 3 && arg1 == 3){
 			new MyHanlder(context).execute();
 			adapter.notifyDataSetChanged();
 		}
@@ -93,8 +109,6 @@ public class AddressListActivity extends BaseNewActivity {
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-
 		}
-
 	}
 }

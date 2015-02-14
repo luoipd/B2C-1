@@ -7,6 +7,8 @@ import org.apache.http.NameValuePair;
 
 import net.yasite.api.AddAddressAPI;
 import net.yasite.api.BaseAPI;
+import net.yasite.api.DeleteAddressAPI;
+import net.yasite.api.GetAddressInfoAPI;
 import net.yasite.api.GetAddressListAPI;
 import net.yasite.api.params.AddressParams;
 import android.content.Context;
@@ -20,9 +22,6 @@ public class AddressService extends BaseService {
 
 	/**
 	 * 添加收货地址
-	 * @param ap
-	 * @param token
-	 * @return
 	 */
 	public Object addAddress(AddressParams ap, String token) {
 		List<NameValuePair> pm = new ArrayList<NameValuePair>();
@@ -48,10 +47,7 @@ public class AddressService extends BaseService {
 		return null;
 	}
 	/**
-	 * 或许配送地址列表
-	 * @param user_id
-	 * @param token
-	 * @return
+	 * 配送地址列表
 	 */
 	public Object getAddressList(String token,String user_id){
 //		List<NameValuePair> pm = new ArrayList<NameValuePair>();
@@ -60,6 +56,38 @@ public class AddressService extends BaseService {
 		BaseAPI api = new GetAddressListAPI(context, token,user_id);
 		try {
 			if(api.doGet()){
+				return api.getHandleResult();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/**
+	 * 收货地址详细信息
+	 */
+	public Object getAddressInfo(String user_id,String address_id,String token){
+		BaseAPI api = new GetAddressInfoAPI(context, user_id, address_id, token);
+		try {
+			if(api.doGet()){
+				return api.getHandleResult();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/**
+	 * 删除收货地址
+	 */
+	public Object deleteAddress(String id,String token){
+		List<NameValuePair> pm = new ArrayList<NameValuePair>();
+		pm.add(getValue("id", id));
+		BaseAPI api = new DeleteAddressAPI(context, pm, token);
+		try {
+			if(api.doPost()){
 				return api.getHandleResult();
 			}
 		} catch (Exception e) {
