@@ -15,10 +15,14 @@ import android.content.Context;
 
 public class CarListAPI extends BaseAPI {
 
-	public CarListAPI(Context context, List<NameValuePair> pm,String id) {
+	/**
+	 * 获取购物车信息列表
+	 * @author hxg-pc
+	 */
+	public CarListAPI(Context context, List<NameValuePair> pm, String id) {
 		super(context, pm);
-		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop + "cartController/getGoodList/"
-				+ id);
+		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop
+				+ "cartController/getGoodList/" + id);
 	}
 
 	@Override

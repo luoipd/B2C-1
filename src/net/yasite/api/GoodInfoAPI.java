@@ -1,16 +1,16 @@
 package net.yasite.api;
 
 import net.yasite.api.params.Urls;
-import net.yasite.entity.GoodEntity;
 import net.yasite.entity.MyGoodEntity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.google.gson.Gson;
 import android.content.Context;
 
 public class GoodInfoAPI extends BaseAPI {
-
+	/**
+	 * 商品详情
+	 */
 	public GoodInfoAPI(Context context, String id) {
 		super(context);
 		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop + Urls.GOODS

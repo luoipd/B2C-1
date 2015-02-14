@@ -15,7 +15,9 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 
 public class LoginAPI extends BaseAPI {
-
+	/**
+	 * 登陆
+	 */
 	public LoginAPI(Context context, List<NameValuePair> pm) {
 		super(context, pm);
 		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop + Urls.USER + Urls.Login);
@@ -28,15 +30,18 @@ public class LoginAPI extends BaseAPI {
 	}
 
 	public void saveSp(String key, String value) {
-		PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
+		PreferenceManager.getDefaultSharedPreferences(context).edit()
+				.putString(key, value).commit();
 	}
 
 	public String getSp(String key) {
-		return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "");
+		return PreferenceManager.getDefaultSharedPreferences(context)
+				.getString(key, "");
 	}
-	
-	public void clearSp(){
-		PreferenceManager.getDefaultSharedPreferences(context).edit().clear().commit();
+
+	public void clearSp() {
+		PreferenceManager.getDefaultSharedPreferences(context).edit().clear()
+				.commit();
 	}
-	
+
 }

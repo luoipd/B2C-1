@@ -8,10 +8,13 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 public class GoodListAPI extends BaseAPI {
-
-	public GoodListAPI(Context context, String page,String id) {
+	/**
+	 * 商品列表
+	 */
+	public GoodListAPI(Context context, String page, String id) {
 		super(context);
-		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop+Urls.GOODS+Urls.getGoodList+page+"/"+id);
+		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop + Urls.GOODS
+				+ Urls.getGoodList + page + "/" + id);
 	}
 
 	@Override

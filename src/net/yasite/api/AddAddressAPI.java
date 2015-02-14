@@ -10,6 +10,10 @@ import android.content.Context;
 
 public class AddAddressAPI extends BaseAPI {
 
+	/**
+	 * 添加用户送货地址
+	 * @author hxg-pc
+	 */
 	public AddAddressAPI(Context context, List<NameValuePair> pm,String token) {
 		super(context, pm);
 		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop + Urls.USER + Urls.addAddress+token);

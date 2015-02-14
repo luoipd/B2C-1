@@ -16,4 +16,8 @@ public class AddressModel extends Model {
 	public Object addAddress(AddressParams ap, String token) {
 		return addressService.addAddress(ap, token);
 	}
+	
+	public Object getAddressList(String token,String user_id){
+		return addressService.getAddressList(token, user_id);
+	}
 }

@@ -83,6 +83,7 @@ public class AddAddressActivity extends BaseNewActivity {
 				if(!flag){
 					ActivityUtil.showToast(context, "任何信息不可为空");
 				}else{
+					ap.setUser_id(new RegistModel(context).getSp("user_id"));
 					new MyHandler(context).execute();
 					setResult(2);
 					finish();

@@ -10,12 +10,15 @@ import com.google.gson.Gson;
 
 import android.content.Context;
 
-public class GoodsCategoryAPI extends BaseAPI{
-
+public class GoodsCategoryAPI extends BaseAPI {
+	/**
+	 * 商品分类
+	 */
 	public GoodsCategoryAPI(Context context, String id) {
 		super(context);
 		// TODO Auto-generated constructor stub
-		setMethod(Urls.WEB_SERVER_PATH+Urls.Shop+Urls.GOODS+Urls.GoodsCategory+id);
+		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop + Urls.GOODS
+				+ Urls.GoodsCategory + id);
 	}
 
 	@Override
@@ -24,5 +27,4 @@ public class GoodsCategoryAPI extends BaseAPI{
 		return new Gson().fromJson(json.toString(), CategoryListEntity.class);
 	}
 
-	
 }

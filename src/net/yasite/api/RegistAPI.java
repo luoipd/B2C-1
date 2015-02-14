@@ -14,7 +14,9 @@ import android.content.Context;
 import android.preference.PreferenceManager;
 
 public class RegistAPI extends BaseAPI {
-
+	/**
+	 * 注册
+	 */
 	public RegistAPI(Context context, List<NameValuePair> pm) {
 		super(context, pm);
 		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop + Urls.USER + Urls.Register);
@@ -30,11 +32,13 @@ public class RegistAPI extends BaseAPI {
 	 * 在注册后保存user_id、user_name等信息到Sp中
 	 */
 	public void saveSp(String key, String value) {
-		PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
+		PreferenceManager.getDefaultSharedPreferences(context).edit()
+				.putString(key, value).commit();
 	}
 
 	public String getSp(String key) {
-		return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "");
+		return PreferenceManager.getDefaultSharedPreferences(context)
+				.getString(key, "");
 	}
 
 }
