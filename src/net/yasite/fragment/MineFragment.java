@@ -2,6 +2,7 @@ package net.yasite.fragment;
 
 import net.yasite.model.LoginModel;
 import net.yasite.test.LoginActivity;
+import net.yasite.test.OrderListActivity;
 import net.yasite.test.R;
 import net.yasite.test.SettingActivity;
 import android.content.Intent;
@@ -67,6 +68,8 @@ public class MineFragment extends Fragment {
 			switch (v.getId()) {
 			case R.id.mine_order:
 				Toast.makeText(getActivity(), "order", 0).show();
+				Intent intent2 = new Intent(getActivity(),OrderListActivity.class);
+				startActivity(intent2);
 				break;
 			case R.id.mine_setting:
 				Toast.makeText(getActivity(), "setting", 0).show();

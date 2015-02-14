@@ -3,12 +3,19 @@ package net.yasite.test;
 import java.util.List;
 
 import net.yasite.adapter.CheckOutAdapter;
+import net.yasite.api.params.AddParams;
+import net.yasite.entity.AddressEntity;
 import net.yasite.entity.CarItemEntity;
+import net.yasite.model.OrderModel;
+import net.yasite.model.RegistModel;
+import net.yasite.net.HandlerHelp;
 import net.yasite.util.ActivityUtil;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Message;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,6 +33,8 @@ public class CheckOutActivity extends BaseNewActivity {
 	List<CarItemEntity> list;
 	CheckOutAdapter adapter;
 	MyReceiver receiver;
+	OrderModel orderModel;
+	AddressEntity addressEntity;
 
 	@Override
 	public void setupView() {
@@ -46,13 +55,35 @@ public class CheckOutActivity extends BaseNewActivity {
 
 	@Override
 	public void setModel() {
-		// TODO Auto-generated method stub
+		orderModel = new OrderModel(context);
 		adapter = new CheckOutAdapter(context);
 		adapter.setList(list);
 		listView.setAdapter(adapter);
 		receiver = new MyReceiver();
 		registerReceiver(receiver, new IntentFilter(
 				"net.yasite.adapter.checkoutsum"));
+		btn_select.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(context, ChoseAddressActivity.class);
+				startActivityForResult(intent, 4);
+			}
+		});
+
+		btn_confirm.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(addressEntity != null){
+					new CreateOrderHandler(context).execute();
+				}else{
+					ActivityUtil.showToast(context, "请选择地址");
+				}
+			}
+		});
 	}
 
 	@Override
@@ -65,6 +96,17 @@ public class CheckOutActivity extends BaseNewActivity {
 			ActivityUtil.showToast(context, "请选择要购买的商品");
 			return false;
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		if (arg0 == 4 && arg1 == 4) {
+			addressEntity = (AddressEntity) arg2.getSerializableExtra("info");
+			ed_name.setText(addressEntity.getConsignee());
+			ed_address.setText(addressEntity.getAddress());
+		}
+		super.onActivityResult(arg0, arg1, arg2);
 	}
 
 	public class MyReceiver extends BroadcastReceiver {
@@ -83,4 +125,28 @@ public class CheckOutActivity extends BaseNewActivity {
 		unregisterReceiver(receiver);
 	}
 
+	class CreateOrderHandler extends HandlerHelp {
+
+		public CreateOrderHandler(Context context) {
+			super(context);
+		}
+
+		@Override
+		public void updateUI() {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void doTask(Message msg) throws Exception {
+			// TODO Auto-generated method stub
+			String user_id = new RegistModel(context).getSp("user_id");
+			orderModel.createOrder(user_id, addressEntity);
+		}
+
+		@Override
+		public void doTaskAsNoNetWork(Message msg) throws Exception {
+			// TODO Auto-generated method stub
+		}
+	}
 }

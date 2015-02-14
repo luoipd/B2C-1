@@ -10,16 +10,13 @@ import android.content.Intent;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
-public class AddressListActivity extends BaseNewActivity {
-
+public class ChoseAddressActivity extends BaseNewActivity {
 	/**
-	 * 收货地址列表
+	 * 选择地址
 	 */
 	ListView listView;
-	Button btn_add;
 	AddressModel addressModel;
 	AddressListEntity addressListEntity;
 	AddressListAdapter adapter;
@@ -27,20 +24,19 @@ public class AddressListActivity extends BaseNewActivity {
 	@Override
 	public void setupView() {
 		// TODO Auto-generated method stub
-		listView = getListView(R.id.listview_addresslist);
-		btn_add = getButton(R.id.btn_add_addresslist);
+		listView = getListView(R.id.listview_chooseaddress);
 	}
 
 	@Override
 	public void setContent() {
 		// TODO Auto-generated method stub
-		setContentView(R.layout.activity_addresslist);
+		setContentView(R.layout.activity_chooseaddress);
 	}
 
 	@Override
 	public void setModel() {
 		addressModel = new AddressModel(context);
-		new AddressListHanlder(context).execute();
+		new ChooseAddressHanlder(context).execute();
 		adapter = new AddressListAdapter(context);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -49,18 +45,11 @@ public class AddressListActivity extends BaseNewActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(context, AddressInfoActivity.class);
+				Intent intent = new Intent();
 				intent.putExtra("info",
 						addressListEntity.getData().get(position));
-				startActivityForResult(intent, 3);
-			}
-		});
-		btn_add.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(context, AddAddressActivity.class);
-				startActivityForResult(intent, 2);
+				setResult(4, intent);
+				finish();
 			}
 		});
 	}
@@ -71,22 +60,9 @@ public class AddressListActivity extends BaseNewActivity {
 		return true;
 	}
 
-	@Override
-	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		// TODO Auto-generated method stub
-		if (arg0 == 2 && arg1 == 2) {
-			new AddressListHanlder(context).execute();
-			adapter.notifyDataSetChanged();
-		} else if (arg0 == 3 && arg1 == 3) {
-			new AddressListHanlder(context).execute();
-			adapter.notifyDataSetChanged();
-		}
-		super.onActivityResult(arg0, arg1, arg2);
-	}
+	class ChooseAddressHanlder extends HandlerHelp {
 
-	class AddressListHanlder extends HandlerHelp {
-
-		public AddressListHanlder(Context context) {
+		public ChooseAddressHanlder(Context context) {
 			super(context);
 		}
 
@@ -111,4 +87,5 @@ public class AddressListActivity extends BaseNewActivity {
 			// TODO Auto-generated method stub
 		}
 	}
+
 }

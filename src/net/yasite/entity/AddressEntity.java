@@ -2,7 +2,9 @@ package net.yasite.entity;
 
 import java.io.Serializable;
 
-public class AddressEntity implements Serializable {
+import net.yasite.api.params.BaseHttpParam;
+
+public class AddressEntity extends BaseHttpParam implements Serializable {
 
 	private String address;
 	private String address_id;

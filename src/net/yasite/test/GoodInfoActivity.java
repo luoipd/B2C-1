@@ -75,7 +75,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 		ImageLoader.getInstance().displayImage(
 				"http://www.yasite.net:80/ecshop/" + goodEntity.getGoods_img(),
 				thumb);
-
+		//加入购物车
 		btn_car.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -85,7 +85,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 				finish();
 			}
 		});
-		
+		//立即购买
 		btn_buy.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
