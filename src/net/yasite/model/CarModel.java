@@ -19,4 +19,8 @@ public class CarModel extends Model {
 	public Object getCarList(String id,String token){
 		return carService.getCarList(id, token);
 	}
+	
+	public Object deleteGood(String user_id, String ids, String token){
+		return carService.deleteGood(user_id, ids, token);
+	}
 }

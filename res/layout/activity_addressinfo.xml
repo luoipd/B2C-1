@@ -77,20 +77,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        android:layout_marginLeft="65dp"
-        android:textSize="25sp"
-        android:text="删除" />
-
-    <Button
-        android:id="@+id/btn_update_addressinfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        android:layout_marginRight="75dp"
-        android:text="修改"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="删除"
         android:textSize="25sp" />
 
 </RelativeLayout>

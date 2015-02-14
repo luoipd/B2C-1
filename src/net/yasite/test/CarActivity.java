@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.JsonArray;
+
 import net.yasite.adapter.CarListAdapter;
 import net.yasite.entity.CarItemEntity;
 import net.yasite.entity.CarListEntity;
@@ -30,15 +32,17 @@ public class CarActivity extends BaseNewActivity {
 	ListView listview;
 	CarListEntity carListEntity;
 	CarListAdapter adapter;
-	Button btn_confirm;
+	Button btn_confirm, btn_del;
 	TextView text_sum;
 	CheckBox cb_all;
 	MyReceiver receiver;
+	String ids;
 
 	@Override
 	public void setupView() {
 		listview = getListView(R.id.listview_car);
 		btn_confirm = getButton(R.id.btn_car_confirm);
+		btn_del = getButton(R.id.btn_car_del);
 		text_sum = getTextView(R.id.text_car_sum);
 		cb_all = getCheckBox(R.id.cb_car_all);
 	}
@@ -88,6 +92,24 @@ public class CarActivity extends BaseNewActivity {
 				startActivity(intent);
 			}
 		});
+
+		btn_del.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				StringBuffer sb = new StringBuffer();
+				for (CarItemEntity carItemEntity : carListEntity.getData()) {
+					if (carItemEntity.isChecked()) {
+						sb.append(carItemEntity.getRec_id());
+						sb.append(",");
+					}
+				}
+				sb.deleteCharAt(sb.length()-1);
+				ids = "["+sb.toString()+"]";
+				System.out.println("``````"+ids);
+				new DelHandler(context).execute();
+			}
+		});
 	}
 
 	@Override
@@ -121,8 +143,35 @@ public class CarActivity extends BaseNewActivity {
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-
 		}
+	}
+
+	class DelHandler extends HandlerHelp {
+
+		public DelHandler(Context context) {
+			super(context);
+		}
+
+		@Override
+		public void updateUI() {
+			// TODO Auto-generated method stub
+			adapter.setList(carListEntity.getData());
+			adapter.notifyDataSetChanged();
+		}
+
+		@Override
+		public void doTask(Message msg) throws Exception {
+			// TODO Auto-generated method stub
+			String user_id = new RegistModel(context).getSp("user_id");
+			String token = new RegistModel(context).getToken();
+			carListEntity = (CarListEntity) carModel.deleteGood(user_id, ids, token);
+		}
+
+		@Override
+		public void doTaskAsNoNetWork(Message msg) throws Exception {
+			// TODO Auto-generated method stub
+		}
+
 	}
 
 	public class MyReceiver extends BroadcastReceiver {

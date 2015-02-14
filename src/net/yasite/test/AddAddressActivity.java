@@ -84,7 +84,7 @@ public class AddAddressActivity extends BaseNewActivity {
 					ActivityUtil.showToast(context, "任何信息不可为空");
 				}else{
 					ap.setUser_id(new RegistModel(context).getSp("user_id"));
-					new MyHandler(context).execute();
+					new AddAddressHandler(context).execute();
 					setResult(2);
 					finish();
 				}
@@ -109,9 +109,9 @@ public class AddAddressActivity extends BaseNewActivity {
 		}
 	};
 
-	class MyHandler extends HandlerHelp {
+	class AddAddressHandler extends HandlerHelp {
 
-		public MyHandler(Context context) {
+		public AddAddressHandler(Context context) {
 			super(context);
 			// TODO Auto-generated constructor stub
 		}

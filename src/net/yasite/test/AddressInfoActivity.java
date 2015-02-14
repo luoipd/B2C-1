@@ -14,10 +14,10 @@ import android.widget.TextView;
 public class AddressInfoActivity extends BaseNewActivity {
 
 	AddressEntity addressEntity;
-	TextView text_name,text_tel,text_dis,text_address;
-	Button btn_delete,btn_update;
+	TextView text_name, text_tel, text_dis, text_address;
+	Button btn_delete;
 	AddressModel addressModel;
-	
+
 	@Override
 	public void setupView() {
 		// TODO Auto-generated method stub
@@ -26,7 +26,6 @@ public class AddressInfoActivity extends BaseNewActivity {
 		text_dis = getTextView(R.id.text_dis_addressinfo);
 		text_address = getTextView(R.id.text_address_addressinfo);
 		btn_delete = getButton(R.id.btn_delete_addressinfo);
-		btn_update = getButton(R.id.btn_update_addressinfo);
 	}
 
 	@Override
@@ -44,19 +43,16 @@ public class AddressInfoActivity extends BaseNewActivity {
 		text_dis.setText(addressEntity.getDistrict());
 		text_address.setText(addressEntity.getAddress());
 		btn_delete.setOnClickListener(listener);
-		btn_update.setOnClickListener(listener);
 	}
+
 	OnClickListener listener = new View.OnClickListener() {
-		
+
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.btn_delete_addressinfo:
-				new MyHandler(context).execute();
-				break;
-			case R.id.btn_update_addressinfo:
-				
+				new AddressInfoHandler(context).execute();
 				break;
 			default:
 				break;
@@ -67,17 +63,18 @@ public class AddressInfoActivity extends BaseNewActivity {
 	@Override
 	public boolean getIntentValue() {
 		// TODO Auto-generated method stub
-		addressEntity = (AddressEntity) getIntent().getSerializableExtra("info");
-		if(addressEntity != null){
+		addressEntity = (AddressEntity) getIntent()
+				.getSerializableExtra("info");
+		if (addressEntity != null) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
-	
-	class MyHandler extends HandlerHelp{
 
-		public MyHandler(Context context) {
+	class AddressInfoHandler extends HandlerHelp {
+
+		public AddressInfoHandler(Context context) {
 			super(context);
 		}
 
@@ -99,8 +96,6 @@ public class AddressInfoActivity extends BaseNewActivity {
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-			
 		}
-		
 	}
 }
