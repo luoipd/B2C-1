@@ -77,9 +77,9 @@ public class CheckOutActivity extends BaseNewActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(addressEntity != null){
+				if (addressEntity != null) {
 					new CreateOrderHandler(context).execute();
-				}else{
+				} else {
 					ActivityUtil.showToast(context, "请选择地址");
 				}
 			}
@@ -141,7 +141,12 @@ public class CheckOutActivity extends BaseNewActivity {
 		public void doTask(Message msg) throws Exception {
 			// TODO Auto-generated method stub
 			String user_id = new RegistModel(context).getSp("user_id");
-			orderModel.createOrder(user_id, addressEntity);
+			String add = addressEntity.getConsignee()
+					+ addressEntity.getCountry() + addressEntity.getProvince()
+					+ addressEntity.getCity() + addressEntity.getDistrict()
+					+ addressEntity.getAddress() + addressEntity.getTel()
+					+ addressEntity.getMobile() + "0";
+			orderModel.createOrder(user_id, add);
 		}
 
 		@Override

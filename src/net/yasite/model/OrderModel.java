@@ -13,11 +13,15 @@ public class OrderModel extends Model {
 		orderService = new OrderService(context);
 	}
 	
-	public Object createOrder(String user_id,AddressEntity ad){
+	public Object createOrder(String user_id,String ad){
 		return orderService.createOrder(user_id, ad);
 	}
 	
 	public Object getOrderList(String id){
 		return orderService.getOrderList(id);
+	}
+	
+	public void cancelOrder(String id){
+		orderService.cancelOrder(id);
 	}
 }

@@ -1,18 +1,18 @@
 package net.yasite.api;
 
-import java.util.List;
 import net.yasite.api.params.Urls;
-import org.apache.http.NameValuePair;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.content.Context;
 
-public class CreateOrderAPI extends BaseAPI {
-	
-	public CreateOrderAPI(Context context, List<NameValuePair> pm) {
-		super(context, pm);
+public class CancelOrderAPI extends BaseAPI {
+
+	public CancelOrderAPI(Context context,String id) {
+		super(context);
 		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop
-				+ "orderController/createOrder/");
+				+ "orderController/cancelOrder/"+id);
 	}
 
 	@Override
