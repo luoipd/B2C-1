@@ -3,12 +3,16 @@ package net.yasite.service;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.NameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+
 import net.yasite.api.BaseAPI;
 import net.yasite.api.CancelOrderAPI;
 import net.yasite.api.CreateOrderAPI;
 import net.yasite.api.GetOrderListAPI;
-import net.yasite.api.params.AddParams;
-import net.yasite.entity.AddressEntity;
+import net.yasite.api.params.Address;
 import android.content.Context;
 
 public class OrderService extends BaseService {
@@ -21,8 +25,19 @@ public class OrderService extends BaseService {
  */
 	public Object createOrder(String user_id,String address){
 		List<NameValuePair> pm = new ArrayList<NameValuePair>();
-		pm.add(getValue("user_id", user_id));
-		pm.add(getValue("address", address));
+		pm.add(getValue("user_id", "99"));
+		Address add= new Address();
+		add.setUser_id("99");
+		add.setConsignee("1");
+		add.setCountry("2");
+		add.setProvince("3");
+		add.setCity("4");
+		add.setDistrict("5");
+		add.setAddress("6");
+		add.setTel("7");
+		add.setMobile("8");
+		add.setEmail("9");
+//		pm.add(getValue("address", address));
 //		pm.add(getValue("consignee", ad.getConsignee()));
 //		pm.add(getValue("country", ad.getCountry()));
 //		pm.add(getValue("province", ad.getProvince()));
@@ -32,9 +47,9 @@ public class OrderService extends BaseService {
 //		pm.add(getValue("tel", ad.getTel()));
 //		pm.add(getValue("mobile", ad.getMobile()));
 //		pm.add(getValue("email", ""));
-		BaseAPI api = new CreateOrderAPI(context, pm);
+		BaseAPI api = new CreateOrderAPI(context,pm,add);
 		try {
-			if(api.doPost()){
+			if(api.doGet()){
 				return api.getHandleResult();
 			}
 		} catch (Exception e) {

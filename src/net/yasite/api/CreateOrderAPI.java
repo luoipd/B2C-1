@@ -1,6 +1,9 @@
 package net.yasite.api;
 
 import java.util.List;
+
+import net.yasite.api.params.Address;
+import net.yasite.api.params.BaseHttpParam;
 import net.yasite.api.params.Urls;
 import org.apache.http.NameValuePair;
 import org.json.JSONException;
@@ -9,8 +12,10 @@ import android.content.Context;
 
 public class CreateOrderAPI extends BaseAPI {
 	
-	public CreateOrderAPI(Context context, List<NameValuePair> pm) {
-		super(context, pm);
+
+	public CreateOrderAPI(Context context, List<NameValuePair> pm,
+			Address address) {
+		super(context, pm, address);
 		setMethod(Urls.WEB_SERVER_PATH + Urls.Shop
 				+ "orderController/createOrder/");
 	}

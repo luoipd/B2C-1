@@ -3,7 +3,7 @@ package net.yasite.test;
 import java.util.List;
 
 import net.yasite.adapter.CheckOutAdapter;
-import net.yasite.api.params.AddParams;
+import net.yasite.api.params.Address;
 import net.yasite.entity.AddressEntity;
 import net.yasite.entity.CarItemEntity;
 import net.yasite.model.OrderModel;

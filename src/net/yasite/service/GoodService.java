@@ -3,6 +3,7 @@ package net.yasite.service;
 import net.yasite.api.BaseAPI;
 import net.yasite.api.GoodInfoAPI;
 import net.yasite.api.GoodListAPI;
+import net.yasite.api.SearchGoodAPI;
 import net.yasite.entity.GoodEntity;
 import net.yasite.entity.GoodListEntity;
 import net.yasite.entity.MyGoodEntity;
@@ -33,6 +34,19 @@ public class GoodService extends BaseService {
 		try {
 			if(api.doGet()){
 				return (MyGoodEntity)api.getHandleResult();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Object searchGood(String name){
+		BaseAPI api = new SearchGoodAPI(context, name);
+		try {
+			if(api.doGet()){
+				return api.getHandleResult();
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

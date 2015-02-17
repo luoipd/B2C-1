@@ -2,8 +2,9 @@ package net.yasite.api.params;
 
 import java.io.Serializable;
 
-public class AddParams extends BaseHttpParam implements Serializable{
+public class Address extends BaseHttpParam{
 
+	private String user_id;
 	private String consignee;
 	private String country;
 	private String province;
@@ -13,6 +14,14 @@ public class AddParams extends BaseHttpParam implements Serializable{
 	private String tel;
 	private String mobile;
 	private String email;
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 
 	public String getConsignee() {
 		return consignee;

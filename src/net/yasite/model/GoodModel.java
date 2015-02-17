@@ -23,4 +23,8 @@ public class GoodModel extends Model {
 		return goodService.getGoodInfo(id);
 	}
 	
+	public Object searchGood(String name){
+		return goodService.searchGood(name);
+	}
+	
 }

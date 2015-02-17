@@ -1,5 +1,6 @@
 package net.yasite.test;
 
+import net.yasite.fragment.IndexFragment;
 import net.yasite.fragment.ListFragment;
 import net.yasite.fragment.MineFragment;
 import net.yasite.model.GoodsCategoryModel;
@@ -56,6 +57,9 @@ public class HomeActivity extends BaseNewActivity {
 		img_list.setOnClickListener(listener);
 		img_mine.setOnClickListener(listener);
 		img_car.setOnClickListener(listener);
+		ft = fm.beginTransaction();
+		ft.replace(android.R.id.content, new IndexFragment());
+		ft.commit();
 	}
 
 	OnClickListener listener = new View.OnClickListener() {
@@ -66,6 +70,9 @@ public class HomeActivity extends BaseNewActivity {
 			switch (v.getId()) {
 			case R.id.img_home:
 				ActivityUtil.showToast(context, "img_home");
+				ft = fm.beginTransaction();
+				ft.replace(android.R.id.content, new IndexFragment());
+				ft.commit();
 				// new GoodsCategoryHandler(context).execute();
 				break;
 			case R.id.img_list:
